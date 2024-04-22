@@ -1,22 +1,38 @@
 package ET;
 
 public class LotEchantillon {
-	private final List<Echantillon> samples;
+    protected Echantillon[] ech;    // Tableau des échantillons
+    protected int nombreEchantillon; // Nombre actuel d'échantillons dans le lot
 
-    public LotEchantillons(List<Echantillon> samples) {
-        this.samples = samples;
+    public LotEchantillon(int taille) {
+        this.ech = new Echantillon[taille];
+        this.nombreEchantillon = 0;
     }
 
-    public List<Echantillon> getSamples() {
-        return samples;
-    }
-
-    // Method to display all samples
-    public void afficherEchantillons() {
-        for (Echantillon sample : samples) {
-            System.out.println("X: " + (sample.getX() ? 1 : 0) +
-                               ", Y: " + (sample.getY() ? 1 : 0) +
-                               ", X.AND.Y: " + (sample.getOutput() ? 1 : 0));
+    // Ajoute un échantillon d'entraînement au lot
+    public void ajouterEchantillon(Echantillon echantillon) {
+        if (nombreEchantillon < ech.length) {
+            ech[nombreEchantillon] = echantillon;
+            nombreEchantillon++;
+        } else {
+            // Option 1: Gérer l'erreur
+            throw new IllegalStateException("Le lot est plein. Impossible d'ajouter plus d'échantillons.");
+            // Option 2: Étendre le tableau (non recommandé pour les tableaux, mieux avec ArrayList)
+            // ech = Arrays.copyOf(ech, ech.length * 2);
+            // ech[nombreEchantillon++] = echantillon;
         }
+    }
+
+    // Récupère un échantillon d'entraînement spécifique
+    public Echantillon getEchantillon(int index) {
+        if (index < 0 || index >= nombreEchantillon) {
+            throw new IndexOutOfBoundsException("Index " + index + " hors des limites pour le lot d'échantillons.");
+        }
+        return ech[index];
+    }
+
+    // Récupère le nombre d'échantillons dans le lot
+    public int getNombreEchantillons() {
+        return nombreEchantillon;
     }
 }
