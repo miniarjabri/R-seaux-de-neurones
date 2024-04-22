@@ -22,6 +22,16 @@ public class NeuroneSortie extends Neurone {
         seuil = random.nextDouble(); // Initialise le seuil avec un nombre aléatoire entre 0 (inclus) et 1 (exclus)
     }
 
+// Méthode pour la fonction d'activation (à implémenter)
+    private double sigmoid(double x) {
+        return 1 / (1 + Math.exp(-x));
+    }
+
+    private double fonctionActivation(double sommePonderee) {
+        // Utiliser la fonction sigmoïde comme fonction d'activation
+        return sigmoid(sommePonderee);
+    }
+
     // Méthode pour afficher le résultat
     public void afficherResultat() {
         System.out.println("Résultat : " + seuil);
