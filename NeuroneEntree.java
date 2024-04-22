@@ -1,38 +1,33 @@
-package LesNeurones;
+package réseaux_de_neurones;
+import java.util.Random;
 
-import java.util.Arrays;
 
-public class NeuroneEntree  {
-
-    private    double[] poids;
-    private double firstActivation;  // This should probably be a double, not an int
-    private final double agregation = 0;
-   
-    // Constructor
-    public NeuroneEntree(double[] poids, double firstActivation) {
-        this.firstActivation = firstActivation;
-        this.poids = Arrays.copyOf(poids, poids.length);
+public class NeuroneEntree extends Neurone {
+	int tailleEntree;
+	private double[] poids;
+    // Constructeur
+    public NeuroneEntree(int tailleEntree) {
+        this.tailleEntree=tailleEntree;
+        initialiserPoidsAleatoirement(); // Initialiser les poids aléatoirement
     }
 
-    
-    public void setPoids(double[] poids) {
-        this.poids = Arrays.copyOf(poids, poids.length);
+    @Override
+    public double calculerSortie(double[] entrees) {
+        // Fonction qui calcule les valeurs à envoyer à chaque neurone de la couche suivante
+        // Dans le cas d'un neurone d'entrée, il renvoie simplement les entrées
+        double sommePonderee = 0;
+        for (int i = 0; i < poids.length; i++) {
+            sommePonderee += poids[i] * entrees[i];
+        }
+        // Appliquer une fonction d'activation si nécessaire
+        return sommePonderee;
     }
 
-    public double[] getPoids() {
-        return Arrays.copyOf(poids, poids.length);
+    // Méthode pour initialiser les poids aléatoirement
+    private void initialiserPoidsAleatoirement() {
+        Random random = new Random();
+        for (int i = 0; i < poids.length; i++) {
+            poids[i] = random.nextDouble(); // Génère un nombre aléatoire entre 0 (inclus) et 1 (exclus)
+        }
     }
-
-    public double getBiais() {
-        return 0;
-    }
-
-    public double activation() {
-        return firstActivation;  
-    }
-    
-    public void setActivation(double activation) {
-        this.firstActivation = activation;
-    }
-    
 }
