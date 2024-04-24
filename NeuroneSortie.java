@@ -1,39 +1,82 @@
-package réseaux_de_neurones;
+package LesNeurones;
 
+import java.util.Arrays;
 import java.util.Random;
 
-public class NeuroneSortie extends Neurone {
-	private double seuil;
-    // Constructeur
-    public NeuroneSortie() {
-        initialiserSeuilAleatoirement();
+public class NeuroneSortie {
+
+    private double[] poids; // Need to maintain weight state if used by this neuron
+    private double biais;
+    private int position;
+    private String typeFonction ;
+    private double agregation;
+    private double activation ; 
+    
+   
+    
+    // Constructor to initialize the neuron with weights, bias, and position
+    public NeuroneSortie (String typeFonction  ,Neuronne[] n , int position) {
+    	Random random = new Random();
+        biais = random.nextDouble(); 
+        this.position = position; //position du neuronne dans la couche
+        agregation = sommePonderee(n , position ) + biais;
+        activation = Factivation (agregation , typeFonction);
+   
+    }
+    double sommePonderee (Neuronne[] n , int pos )
+    {double somme;
+    	for (int i=0; i<pos ; i++)
+    	{
+    		somme=neuronne[i].getPoids()[pos]*neuronne[i].getActivation();
+    	}
+    return somme; 
     }
 
-    @Override
-    public double calculerSortie(double[] entrees) {
-        // Fonction qui calcule les valeurs à envoyer à chaque neurone de la couche suivante
-        // Dans le cas du neurone de sortie, il n'y a pas de calcul à faire, car il ne reçoit pas d'entrées de la couche suivante
-        return seuil; // Le seuil (biais) est renvoyé en tant que sortie du neurone de sortie
+
+    public void setPoids(double[] poids) {
+        this.poids = Arrays.copyOf(poids, poids.length);
     }
 
-    // Méthode pour initialiser le seuil aléatoirement
-    private void initialiserSeuilAleatoirement() {
-        Random random = new Random();
-        seuil = random.nextDouble(); // Initialise le seuil avec un nombre aléatoire entre 0 (inclus) et 1 (exclus)
+    public double[] getPoids() {
+        return this.poids;
+    }
+    public void setBiais(double biais) {
+        this.biais = biais;
     }
 
-// Méthode pour la fonction d'activation (à implémenter)
-    private double sigmoid(double x) {
-        return 1 / (1 + Math.exp(-x));
+    public double getBiais() {
+        return this.biais;
     }
 
-    private double fonctionActivation(double sommePonderee) {
-        // Utiliser la fonction sigmoïde comme fonction d'activation
-        return sigmoid(sommePonderee);
+    public void setPosition(int position) {
+        this.position = position;
     }
 
-    // Méthode pour afficher le résultat
-    public void afficherResultat() {
-        System.out.println("Résultat : " + seuil);
+    public int getPosition() {
+        return this.position;
     }
+
+/*    public double agregation(Object[] n) {
+	    double z = biais;
+	    for (Object neuron : n) {
+	        if (neuron instanceof NeuroneEntree) {
+	            NeuroneEntree entree = (NeuroneEntree) neuron;
+	            z += entree.getPoids()[position] * entree.activation();  
+	        } else if (neuron instanceof NeuroneCachee) {
+	            NeuroneCachee cachee = (NeuroneCachee) neuron;
+	            z += cachee.getPoids()[position] * cachee.activation();
+	        }
+	    }
+	    return z;
+	}
+*/
+// Placeholder for the activation method to avoid recursion
+   public double Factivation(double z , String  TypeFonction) {
+	   if (TypeFonction == "sigmoide" )
+	    activation =  1 / (1 + Math.exp(z));
+	
+  return activation ; 
 }
+   double getSortie ()
+   }
+
