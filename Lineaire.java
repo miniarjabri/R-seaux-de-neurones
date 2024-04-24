@@ -1,5 +1,5 @@
 package LesFonctions;
 
-public class Lineaire {
+public class Lineaire implements FonctionActivation {
 
 }

@@ -1,5 +1,5 @@
 package LesFonctions;
 
-public class Sigmoid {
+public class Sigmoid implements FonctionActivation{
 
 }

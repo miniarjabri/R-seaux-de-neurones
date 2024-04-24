@@ -1,5 +1,5 @@
 package LesFonctions;
 
-public class Gaussienne {
+public class Gaussienne implements FonctionActivation {
 
 }
