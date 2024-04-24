@@ -1,12 +1,16 @@
 package ET;
 
-public class Echantillon extends ReseauNeurone {
+import ReseauxDeNeurones.ReseauNeurone;
+
+public class Echantillon  {
     private float[] input;
     private float[] output;
+    private ReseauNeurone reseau; 
 
     public Echantillon(float[] input, float[] output) {
         this.input = input;
         this.output = output;
+        ReseauNeurone reseau = new ReseauNeurone (input, output);
     }
 
     public float[] getInput() {
@@ -16,4 +20,5 @@ public class Echantillon extends ReseauNeurone {
     public float[] getOutput() {
         return output;
     }
+     
 }
