@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoucheSortie implements Couche<NeuroneSortie> {
-    private List<NeuroneSortie> neurones;
+    private NeuronneSortie [] neurones;
 
     // Constructor that takes a list of neurons
-    public CoucheSortie(List<NeuroneSortie> neurones) {
-        this.neurones = new ArrayList<>(neurones); 
-    }
+        public  CoucheSortie( int nbNeuronne, String typeFonction, Neuronne[] n ) {
+        	this.nbNeuronne=nbNeuronne;
+            for (int i=0  ; i<nbNeuronne ; i++)
+            {
+            	neurones[i]=new NeruonneCachee(typeFonction , n ,i);
+            }
+        }
 
     @Override
     public int getNombreNeurones() {

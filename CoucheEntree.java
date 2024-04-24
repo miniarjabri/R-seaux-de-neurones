@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoucheEntree implements Couche<NeuroneEntree> {
-    private List<NeuroneEntree> neurones;
+    private NeuroneEntree [] neuronnes;
+    private int nbNeuronnes ; 
 
     // Constructor that takes a list of neurons
-    public CoucheEntree(List<NeuroneEntree> neurones) {
-        this.neurones = new ArrayList<>(neurones); 
-    }
+    public CoucheEntree(double [] input, int nbNeuronnes,int nbNeuronneCoucheSuivante) {
+        this.nbNeuronnes=nbNeuronnes ;
+        for (i=0;i<nbNeuronnes ; i++)
+        {
+    	neruonnes[i] = new NeuronneEntree(input[i], nbNeuronneCoucheSuivante);
+    }}
 
     @Override
     public int getNombreNeurones() {
