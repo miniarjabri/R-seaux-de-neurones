@@ -7,7 +7,7 @@ Le projet est organisé comme suit :
 
 ReseauxDeNeurones : Ce package contient la classes principales pour le réseau de neurones;  la classe ReseauNeurone qui représente le réseau dans son ensemble.
 LesCouches : Ce package contient une classe abstraite Couche duquelle les différentes classes couches du réseau, telles que la couche d'entrée, la couche cachée et la couche de sortie.
-LesNeurones : Ce package contient une classe abstraite Neuronne duqeulle héritent les différentes classes des types de neurones utilisés dans le réseau, tels que les neurones d'entrée, les neurones cachés et les neurones de sortie.
+LesNeurones : Ce package contient une classe abstraite Neurone duqeulle héritent les différentes classes des types de neurones utilisés dans le réseau, tels que les neurones d'entrée, les neurones cachés et les neurones de sortie.
 
 chaque couche posséde de 1 à plusieurs neuronnes.
 un neuronne peut exister sans une couche.
