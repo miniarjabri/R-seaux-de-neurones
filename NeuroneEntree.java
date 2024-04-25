@@ -39,7 +39,7 @@ public class NeuroneEntree {
 
     // Méthode pour obtenir l'activation du neurone
     @override
-    public double Factivation(0,Null) {
+    public double Factivation(0,null) {
         return firstActivation;
     }
 
