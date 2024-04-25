@@ -63,6 +63,7 @@ public class NeuroneSortie {
     }
 
     // Méthode pour l'activation du neurone
+    @override
     public double Factivation(double z, String TypeFonction) {
         if (TypeFonction.equals("sigmoide")) {
             return 1 / (1 + Math.exp(-z));
