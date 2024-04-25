@@ -69,6 +69,7 @@ public class NeuroneCache {
 
 
  // Méthode pour l'activation du neurone
+    @override
     public double Factivation(double z, String typeFonction) {
         if (typeFonction.equals("sigmoide")) {
             return 1 / (1 + Math.exp(-z));
