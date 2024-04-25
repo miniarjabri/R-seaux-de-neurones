@@ -18,7 +18,7 @@ public class ReseauNeurone {
         couches = new Couche[nombreCouches];
         
         // Créer la couche d'entrée
-        couches[0] = new CoucheEntree(input, nbre_neurone_couche[0]);
+        couches[0] = new CoucheEntree(input, nbre_neurone_couche[0],nbre_neurone_couche[1]);
 
         // Créer les couches cachées
         for (int i = 1; i < nombreCouches - 1; i++) {
