@@ -5,33 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoucheEntree implements Couche<NeuroneEntree> {
-    private NeuroneEntree [] neuronnes;
-    private int nbNeuronnes ; 
+    private NeuroneEntree[] neuronnes; // Tableau des neurones d'entrée
+    private int nbNeuronnes; // Nombre de neurones dans la couche d'entrée
 
-    // Constructor that takes a list of neurons
-    public CoucheEntree(double [] input, int nbNeuronnes,int nbNeuronneCoucheSuivante) {
-        this.nbNeuronnes=nbNeuronnes ;
-        for (i=0;i<nbNeuronnes ; i++)
-        {
-    	neruonnes[i] = new NeuronneEntree(input[i], nbNeuronneCoucheSuivante);
-    }}
+    // Constructeur qui prend en paramètre un tableau d'entrées et le nombre de neurones dans la couche suivante
+    public CoucheEntree(double[] input, int nbNeuronnes, int nbNeuronneCoucheSuivante) {
+        this.nbNeuronnes = nbNeuronnes;
 
+        // Initialisation des neurones d'entrée avec les valeurs d'entrée fournies
+        for (int i = 0; i < nbNeuronnes; i++) {
+            neuronnes[i] = new NeuroneEntree(input[i], nbNeuronneCoucheSuivante);
+        }
+    }
+
+    // Méthode pour obtenir le nombre de neurones dans la couche
     @Override
     public int getNombreNeurones() {
-        return neurones.size(); 
+        return nbNeuronnes;
     }
 
+    // Méthode pour obtenir la liste des neurones d'entrée
     @Override
-    public List<Neurone> getNeurones() {
-        return neurones; // Return the list of neurons
+    public List<NeuroneEntree> getNeurones() {
+        return Arrays.asList(neuronnes); // Retourne la liste des neurones d'entrée
     }
 
-
+    // Méthode pour définir les neurones de la couche
     @Override
     public void setNeurones(List<NeuroneEntree> neurones) {
-        this.neurones = new ArrayList<>(neurones); // Reset the neuron list with a new list
+        this.neuronnes = neurones.toArray(new NeuroneEntree[0]); // Réinitialise la liste des neurones avec une nouvelle liste
     }
 
+    // Méthode pour obtenir le type de la couche (ici, couche d'entrée)
     @Override
     public String getTypeCouche() {
         return "Entree";
