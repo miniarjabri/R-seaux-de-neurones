@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class NeuroneCache {
-    private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche précédente
+    private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche suivante
     private double biais; // Le biais (seuil) du neurone
     private int position; // La position du neurone dans la couche
     private String typeFonction; // Le type de fonction d'activation utilisée par le neurone
