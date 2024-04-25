@@ -35,9 +35,11 @@ public class NeuroneEntree {
     public double getBiais() {
         return 0;
     }
+    
 
     // Méthode pour obtenir l'activation du neurone
-    public double activation() {
+    @override
+    public double Factivation(0,Null) {
         return firstActivation;
     }
 
