@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class NeuroneCache {
-    private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche suivante
+    private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche précédente
     private double biais; // Le biais (seuil) du neurone
     private int position; // La position du neurone dans la couche
     private String typeFonction; // Le type de fonction d'activation utilisée par le neurone
@@ -12,7 +12,7 @@ public class NeuroneCache {
     private double activation; // La sortie du neurone après l'application de la fonction d'activation
 
     // Constructeur pour initialiser le neurone avec ses poids, son biais et sa position
-    public NeuroneCache(String typeFonction, Neurone[] n, int position, int nbNeuronneCoucheSuivante) {
+    public NeuroneCache(String typeFonction, Neuronne[] n, int position, int nbNeuronneCoucheSuivante) {
         // Initialisation aléatoire du biais (seuil)
         Random random = new Random();
         biais = random.nextDouble();
@@ -34,7 +34,7 @@ public class NeuroneCache {
     }
 
     // Méthode pour calculer la somme pondérée des entrées
-    double sommePonderee(Neurone[] n, int pos) {
+    double sommePonderee(Neuronne[] n, int pos) {
         double somme = 0.0;
         for (int i = 0; i < pos; i++) {
             somme += n[i].getPoids()[pos - 1] * n[i].getActivation();
@@ -69,7 +69,6 @@ public class NeuroneCache {
 
 
  // Méthode pour l'activation du neurone
-    @override
     public double Factivation(double z, String typeFonction) {
         if (typeFonction.equals("sigmoide")) {
             return 1 / (1 + Math.exp(-z));

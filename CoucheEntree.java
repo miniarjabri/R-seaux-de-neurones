@@ -2,9 +2,10 @@ package LesCouches;
 
 import LesNeurones.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class CoucheEntree implements Couche<NeuroneEntree> {
+public class CoucheEntree implements Couche{
     private NeuroneEntree[] neuronnes; // Tableau des neurones d'entrée
     private int nbNeuronnes; // Nombre de neurones dans la couche d'entrée
 
@@ -25,13 +26,11 @@ public class CoucheEntree implements Couche<NeuroneEntree> {
     }
 
     // Méthode pour obtenir la liste des neurones d'entrée
-    @Override
-    public List<NeuroneEntree> getNeurones() {
-        return Arrays.asList(neuronnes); // Retourne la liste des neurones d'entrée
+    public NeuroneEntree [] getNeurones() {
+        return neuronnes; // Retourne la liste des neurones d'entrée
     }
 
     // Méthode pour définir les neurones de la couche
-    @Override
     public void setNeurones(List<NeuroneEntree> neurones) {
         this.neuronnes = neurones.toArray(new NeuroneEntree[0]); // Réinitialise la liste des neurones avec une nouvelle liste
     }
@@ -41,4 +40,10 @@ public class CoucheEntree implements Couche<NeuroneEntree> {
     public String getTypeCouche() {
         return "Entree";
     }
+    @Override
+    public double[] getSortie( String TypeFonction) {
+    double [] s=null;
+    s[0]=0;
+    return s;
+}
 }

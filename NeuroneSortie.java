@@ -23,7 +23,7 @@ public class NeuroneSortie {
         agregation = sommePonderee(n, position) + biais;
 
         // Calcul de l'activation du neurone
-        activation = Factivation(agregation, typeFonction);
+        activation = Factivation( typeFonction);
     }
 
     // Méthode pour calculer la somme pondérée des entrées
@@ -63,16 +63,15 @@ public class NeuroneSortie {
     }
 
     // Méthode pour l'activation du neurone
-    @override
-    public double Factivation(double z, String TypeFonction) {
+    public double Factivation( String TypeFonction) {
         if (TypeFonction.equals("sigmoide")) {
-            return 1 / (1 + Math.exp(-z));
+            return 1 / (1 + Math.exp(-agregation));
         }
         return 0; // Par défaut, retourne 0 si le type de fonction d'activation n'est pas reconnu
     }
 
     // Méthode pour obtenir la sortie du neurone
-    double getSortie() {
+    double getNeurones() {
         return activation;
     }
 }

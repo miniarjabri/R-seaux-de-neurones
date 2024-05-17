@@ -8,8 +8,6 @@ public class NeuroneEntree {
     private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche suivante
     private double firstActivation; // L'activation initiale de ce neurone
     private final double agregation = 0; // L'agrégation est toujours 0 pour les neurones d'entrée
-    private double somme = 0; // Valeur par défaut pour somme
-    private String fonction = "";// Valeur par défaut pour fonction
 
     // Constructeur
     public NeuroneEntree(double firstActivation, int nbNeuronneCoucheSuivante) {
@@ -37,11 +35,9 @@ public class NeuroneEntree {
     public double getBiais() {
         return 0;
     }
-    
 
     // Méthode pour obtenir l'activation du neurone
-    @override
-    public double Factivation(double somme,String fonction) {
+    public double activation() {
         return firstActivation;
     }
 
