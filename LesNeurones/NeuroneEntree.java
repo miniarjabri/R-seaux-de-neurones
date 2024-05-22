@@ -37,7 +37,7 @@ public class NeuroneEntree {
     }
 
     // Méthode pour obtenir l'activation du neurone
-    public double activation() {
+    public double Factivation() {
         return firstActivation;
     }
 

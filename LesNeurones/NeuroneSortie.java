@@ -8,12 +8,12 @@ public class NeuroneSortie {
     private double[] poids; // Les poids des connexions entre ce neurone et les neurones de la couche précédente
     private double biais; // Le biais (seuil) du neurone
     private int position; // La position du neurone dans la couche
-    private String typeFonction; // Le type de fonction d'activation utilisée par le neurone
     private double agregation; // La somme pondérée des entrées du neurone
     private double activation; // La sortie du neurone après l'application de la fonction d'activation
+    private double somme;
 
     // Constructeur pour initialiser le neurone avec ses poids, son biais et sa position
-    public NeuroneSortie(String typeFonction, Neuronne[] n, int position) {
+    public NeuroneSortie( Neuronne[] n, int position) {
         Random random = new Random();
         biais = random.nextDouble(); // Initialisation aléatoire du biais
 
@@ -23,12 +23,11 @@ public class NeuroneSortie {
         agregation = sommePonderee(n, position) + biais;
 
         // Calcul de l'activation du neurone
-        activation = Factivation( typeFonction);
+        activation = Factivation( );
     }
 
     // Méthode pour calculer la somme pondérée des entrées
     double sommePonderee(Neuronne[] n, int pos) {
-        double somme = 0.0;
         for (int i = 0; i < pos; i++) {
             somme += n[i].getPoids()[pos] * n[i].getActivation();
         }
@@ -52,6 +51,10 @@ public class NeuroneSortie {
     public double getBiais() {
         return this.biais;
     }
+    
+    public double getSomme() {
+    	return somme;
+    	}
 
     // Méthodes setter et getter pour la position du neurone dans la couche
     public void setPosition(int position) {
@@ -63,12 +66,13 @@ public class NeuroneSortie {
     }
 
     // Méthode pour l'activation du neurone
-    public double Factivation( String TypeFonction) {
-        if (TypeFonction.equals("sigmoide")) {
-            return 1 / (1 + Math.exp(-agregation));
-        }
-        return 0; // Par défaut, retourne 0 si le type de fonction d'activation n'est pas reconnu
+    public double Factivation( ) {
+           return 1 / (1 + Math.exp(-agregation));
+ }
+    public double DeriveeActivation() {
+        return activation * (1 - activation); // Dérivée de sigmoid
     }
+ 
 
     // Méthode pour obtenir la sortie du neurone
     double getNeurones() {

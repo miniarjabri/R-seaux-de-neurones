@@ -10,9 +10,10 @@ public class NeuroneCache {
     private String typeFonction; // Le type de fonction d'activation utilisée par le neurone
     private double agregation; // La somme pondérée des entrées du neurone
     private double activation; // La sortie du neurone après l'application de la fonction d'activation
+    private double somme=0;
 
     // Constructeur pour initialiser le neurone avec ses poids, son biais et sa position
-    public NeuroneCache(String typeFonction, Neuronne[] n, int position, int nbNeuronneCoucheSuivante) {
+    public NeuroneCache( Neuronne[] n, int position, int nbNeuronneCoucheSuivante) {
         // Initialisation aléatoire du biais (seuil)
         Random random = new Random();
         biais = random.nextDouble();
@@ -30,17 +31,19 @@ public class NeuroneCache {
         agregation = sommePonderee(n, position) + biais;
 
         // Calcul de l'activation du neurone
-        this.activation = Factivation(agregation, typeFonction);
+        this.activation = Factivation();
     }
 
     // Méthode pour calculer la somme pondérée des entrées
     double sommePonderee(Neuronne[] n, int pos) {
-        double somme = 0.0;
         for (int i = 0; i < pos; i++) {
             somme += n[i].getPoids()[pos - 1] * n[i].getActivation();
         }
         return somme;
     }
+    public double getSomme() {
+    	return somme;
+    	}
 
     // Méthodes setter et getter pour les poids et le biais
     public void setPoids(double[] poids) {
@@ -66,19 +69,17 @@ public class NeuroneCache {
     public int getPosition() {
         return this.position;
     }
+    public double DeriveeActivation() {
+            return activation * (1 - activation); // Dérivée de sigmoid
+        }
+     
 
 
  // Méthode pour l'activation du neurone
-    public double Factivation(double z, String typeFonction) {
-        if (typeFonction.equals("sigmoide")) {
-            return 1 / (1 + Math.exp(-z));
-        } else if (typeFonction.equals("identite")) {
-            return z;
-        } else if (typeFonction.equals("heaviside")) {
-            return z < 0 ? 0 : 1;
-        } else {
-            return 0; // Par défaut, retourne 0 si le type de fonction d'activation n'est pas reconnu
+    public double Factivation() {
+        
+            return 1 / (1 + Math.exp(-agregation));
         }
-    }
+    
 
 }

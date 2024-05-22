@@ -21,5 +21,8 @@ public interface Couche<N> {
     String getTypeCouche();
 
 		N[] getNeurones();
-		 double[] getSortie(String TypeFonction) ;
+		 double[] getSortie() ;
+		 public void updateBiasesAndWeights(double[] nablaB, double[][] nablaW) ;
+		 public double[][] getPoids();
+		double[] activationPrime();
 }
