@@ -15,8 +15,8 @@ public class NeuroneEntree {
         this.poids = new double[nbNeuronneCoucheSuivante]; // Initialisation du tableau de poids
         
         // Initialisation aléatoire des poids
+        Random random = new Random();
         for (int i = 0; i < nbNeuronneCoucheSuivante; i++) {
-            Random random = new Random();
             poids[i] = random.nextDouble();
         }
     }
@@ -30,12 +30,16 @@ public class NeuroneEntree {
     public double[] getPoids() {
         return Arrays.copyOf(poids, poids.length);
     }
-
+    
     // Méthode pour obtenir le biais du neurone (toujours 0 pour les neurones d'entrée)
     public double getBiais() {
         return 0;
     }
-
+    
+    public double getZ() {
+        return 0;
+    }
+    
     // Méthode pour obtenir l'activation du neurone
     public double Factivation() {
         return firstActivation;

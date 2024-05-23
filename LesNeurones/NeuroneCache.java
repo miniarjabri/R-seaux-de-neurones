@@ -13,7 +13,7 @@ public class NeuroneCache {
     private double somme=0;
 
     // Constructeur pour initialiser le neurone avec ses poids, son biais et sa position
-    public NeuroneCache( Neuronne[] n, int position, int nbNeuronneCoucheSuivante) {
+    public NeuroneCache( NeuroneEntree[] n, int position, int nbNeuronneCoucheSuivante) {
         // Initialisation aléatoire du biais (seuil)
         Random random = new Random();
         biais = random.nextDouble();
@@ -33,16 +33,46 @@ public class NeuroneCache {
         // Calcul de l'activation du neurone
         this.activation = Factivation();
     }
+    public NeuroneCache( NeuroneCache[] n, int position, int nbNeuronneCoucheSuivante) {
+        // Initialisation aléatoire du biais (seuil)
+        Random random = new Random();
+        biais = random.nextDouble();
 
+        // Initialisation aléatoire des poids
+        poids = new double[nbNeuronneCoucheSuivante];
+        for (int i = 0; i < nbNeuronneCoucheSuivante; i++) {
+            poids[i] = random.nextDouble();
+        }
+
+        // Position du neurone dans la couche
+        this.position = position;
+
+        // Calcul de l'agrégation du neurone
+        agregation = sommePonderee(n, position) + biais;
+
+        // Calcul de l'activation du neurone
+        this.activation = Factivation();
+    }
     // Méthode pour calculer la somme pondérée des entrées
-    double sommePonderee(Neuronne[] n, int pos) {
+    double sommePonderee(NeuroneEntree[] n, int pos) {
         for (int i = 0; i < pos; i++) {
-            somme += n[i].getPoids()[pos - 1] * n[i].getActivation();
+            somme += n[i].getPoids()[pos - 1] * n[i].Factivation();
+        }
+        return somme;
+    }
+ // Méthode pour calculer la somme pondérée des entrées
+    double sommePonderee(NeuroneCache[] n, int pos) {
+        for (int i = 0; i < pos; i++) {
+            somme += n[i].getPoids()[pos - 1] * n[i].Factivation();
         }
         return somme;
     }
     public double getSomme() {
     	return somme;
+    	}
+
+    public double getZ() {
+    	return somme+biais;
     	}
 
     // Méthodes setter et getter pour les poids et le biais

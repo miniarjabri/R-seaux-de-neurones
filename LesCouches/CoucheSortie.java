@@ -11,16 +11,26 @@ public class CoucheSortie implements Couche<NeuroneSortie> {
     private double [][] lesPoids;
 
     // Constructeur prenant en paramètres le nombre de neurones, le type de fonction et une liste de neurones
-    public CoucheSortie(int nbNeuronne, Object[] objects) {
+    public CoucheSortie(int nbNeuronne, NeuroneCache[] n) {
         this.nbNeurone = nbNeuronne;
         this.neurones = new NeuroneSortie[nbNeuronne]; // Initialize the neuron array
-
+        this.lesSeuils = new double[nbNeuronne];
+        this.lesPoids = new double[nbNeuronne][];
         // Initialisation des neurones de la couche de sortie avec les paramètres fournis
         for (int i = 0; i < nbNeuronne; i++) {
-            neurones[i] = new NeuroneSortie( (Neuronne[]) objects, i);
+            neurones[i] = new NeuroneSortie( n, i);
         }
     }
-
+    public CoucheSortie(int nbNeuronne, NeuroneEntree[] n) {
+        this.nbNeurone = nbNeuronne;
+        this.neurones = new NeuroneSortie[nbNeuronne]; // Initialize the neuron array
+        this.lesSeuils = new double[nbNeuronne];
+        this.lesPoids = new double[nbNeuronne][];
+        // Initialisation des neurones de la couche de sortie avec les paramètres fournis
+        for (int i = 0; i < nbNeuronne; i++) {
+            neurones[i] = new NeuroneSortie( n, i);
+        }
+    }
     // Méthode pour obtenir le nombre de neurones dans la couche
     @Override
     public int getNombreNeurones() {
@@ -30,7 +40,7 @@ public class CoucheSortie implements Couche<NeuroneSortie> {
     // Méthode pour obtenir la liste des neurones de la couche de sortie
     // Méthode pour obtenir la liste des neurones d'entrée
     @Override
-    public NeuroneSortie [] getNeurones() {
+    public NeuroneSortie[] getNeurones() {
         return neurones; // Retourne la liste des neurones d'entrée
     }
 
@@ -73,12 +83,23 @@ public class CoucheSortie implements Couche<NeuroneSortie> {
     }
     	 return z;
     }
-    public double[] activationPrime() {
+    public double[] activation() {
         double[] LesDeriveesActivations=new double[neurones.length];
         for (int i = 0; i < neurones.length; i++) {
              LesDeriveesActivations[i] = neurones[i].DeriveeActivation();
         }
         return LesDeriveesActivations;
+    }
+ // Cette méthode se trouve également dans la classe Couche ou ses sous-classes.
+    public double[] activationPrime(double[] z) {
+        // Implémentation dépend de la fonction d'activation spécifique utilisée par la couche
+        // Par exemple, pour une fonction d'activation sigmoïde :
+        double[] result = new double[z.length];
+        for (int i = 0; i < z.length; i++) {
+            double sigmoid = 1.0 / (1.0 + Math.exp(-z[i]));
+            result[i] = sigmoid * (1 - sigmoid);
+        }
+        return result;
     }
     
 
@@ -95,4 +116,13 @@ public class CoucheSortie implements Couche<NeuroneSortie> {
     }
     	return s;
 }
+
+    @Override
+    public double[] getZ(double[] activations) {
+        double[] z = new double[neurones.length];
+        for (int i = 0; i < neurones.length; i++) {
+            z[i] = neurones[i].getZ();
+        }
+        return z;
+    }
 }

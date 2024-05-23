@@ -13,7 +13,19 @@ public class NeuroneSortie {
     private double somme;
 
     // Constructeur pour initialiser le neurone avec ses poids, son biais et sa position
-    public NeuroneSortie( Neuronne[] n, int position) {
+    public NeuroneSortie( NeuroneCache[] n, int position) {
+        Random random = new Random();
+        biais = random.nextDouble(); // Initialisation aléatoire du biais
+
+        this.position = position; // Position du neurone dans la couche
+
+        // Calcul de l'agrégation du neurone
+        agregation = sommePonderee(n, position) + biais;
+
+        // Calcul de l'activation du neurone
+        activation = Factivation( );
+    }
+    public NeuroneSortie( NeuroneEntree[] n, int position) {
         Random random = new Random();
         biais = random.nextDouble(); // Initialisation aléatoire du biais
 
@@ -26,13 +38,24 @@ public class NeuroneSortie {
         activation = Factivation( );
     }
 
+
     // Méthode pour calculer la somme pondérée des entrées
-    double sommePonderee(Neuronne[] n, int pos) {
+    double sommePonderee(NeuroneCache[] n, int pos) {
         for (int i = 0; i < pos; i++) {
-            somme += n[i].getPoids()[pos] * n[i].getActivation();
+            somme += n[i].getPoids()[pos] * n[i].Factivation();
         }
         return somme;
     }
+    double sommePonderee(NeuroneEntree[] n, int pos) {
+        for (int i = 0; i < pos; i++) {
+            somme += n[i].getPoids()[pos] * n[i].Factivation();
+        }
+        return somme;
+    }
+  
+    public double getZ() {
+    	return somme+biais;
+    	}
 
     // Méthodes setter et getter pour les poids
     public void setPoids(double[] poids) {
